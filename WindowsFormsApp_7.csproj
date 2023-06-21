@@ -61,6 +61,7 @@
     <Compile Include="Rockets.Designer.cs">
       <DependentUpon>Rockets.cs</DependentUpon>
     </Compile>
+    <Compile Include="strategy.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
