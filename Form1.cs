@@ -15,37 +15,42 @@ namespace WindowsFormsApp_7
     {
         bool ventilation_enabled = true;
         Facade facade = new Facade();
+
         Random rnd = new Random();
         int rnd_buffer;
-        
+
         bool nerd_destructor = false;
         public Form1()
         {
             InitializeComponent();
-
-            timer1.Tick += timer1_Tick;
             timer1.Interval = 1000;
             timer1.Enabled = true;
+
+            
         }
         
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            //TimerCallback timerCallback = new TimerCallback(Gradus);
-            //var timer = new System.Threading.Timer(timerCallback, 0, 500, 1000);
+            sub form2 = new sub();
+            this.Hide();
+            form2.ShowDialog();
+            this.Show();
         }
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            facade.RED_BUTTON();
-            Environment.Exit(0);
+            red_btn red_Btn = new Facade().RED_BUTTON;
+            red_Btn();
+            
         }
 
         private void nerd_detector_Click(object sender, EventArgs e)
         {
             if (nerd_destructor == true)
             {
-                MessageBox.Show("Вы уже уничтожили зануду");
+                MessageBox.Show("Вы уже уничтожили зануду", "Зануда", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -62,22 +67,23 @@ namespace WindowsFormsApp_7
         {
             if (facade.enemy_flag == true)
             {
-                MessageBox.Show("Вы не можете продолжить сканирование, пока враг не уничтожен!!", "ВНИМАНИЕ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                facade.Scan();
+               
             }
             else
             {
-                rnd_buffer = rnd.Next(0, 2);
+                rnd_buffer = rnd.Next(0, 3);
                 switch (rnd_buffer)
                 {
                     case (0):
                         {
-                            MessageBox.Show("На радаре обнаружен враг!");
+                            MessageBox.Show("На радаре обнаружен враг!", "ВРАГ!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             facade.enemy_flag = true;
                             break;
                         }
                     default:
                         {
-                            MessageBox.Show("Врагов не обнаружено...");
+                            MessageBox.Show("Врагов не обнаружено...", "Радар", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         }
                 }
@@ -92,37 +98,58 @@ namespace WindowsFormsApp_7
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            
-            if ( ventilation_enabled == true )
-            {
-                ventilation_enabled = false;
-            }
-            if( ventilation_enabled == false )
-            {
-                ventilation_enabled= true;
-            }
-        }
 
-        private void Form1_Activated(object sender, EventArgs e)
-        {
+
+            ventilation_enabled = !ventilation_enabled;
+            
             
         }
-
-        private void Form1_Enter(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             facade.Ventilation(ventilation_enabled);
-            gradus_lbl.Text = null;
-            gradus_lbl.Text = facade.gradus.ToString();
+            
+            gradus_lbl.Text = facade.gradus.ToString() + "°С";
+            if(facade.gradus >= 60)
+            {
+                gradus_lbl.ForeColor = Color.Red;
+                pictureBox3.ImageLocation = ".\\picture\\123.png";
+            }
+            else if (facade.gradus < 60)
+            {
+                gradus_lbl.ForeColor = Color.Aqua;
+                pictureBox3.ImageLocation = ".\\picture\\321.png";
+            }
+            if (ventilation_enabled == false)
+                
+            {
+                pictureBox3.ImageLocation = ".\\picture\\vent_enabled.png";
+            }
+            if(facade.gradus == 110)
+            {
+                timer1.Enabled = false;
+                MessageBox.Show("Весь экипаж подводной лодки был сварен заживо", "Ой...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
+            if (facade.gradus <=20)
+            {
+                facade.gradus++;
+            }
+        }
+
+        private void surfacing_pb_Click(object sender, EventArgs e)
+        {
+            Form1_Load(sender, e);
+        }
+
+        private void about_pb_Click(object sender, EventArgs e)
+        {
+            about about = new about();
+            about.Show();
+        }
+
+        private void about_pb1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
