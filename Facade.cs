@@ -43,7 +43,7 @@ namespace WindowsFormsApp_7
         }
 
     }
-    class Submarine_movements
+    public class Submarine_movements
     {
         public byte Ventilation(bool ventilation_enabled, byte gradus)
         {
@@ -59,34 +59,58 @@ namespace WindowsFormsApp_7
 
         }
     }
-    class Submarine_military_actions
+    public class Submarine_military_actions
     {
 
-        public void Attack(string rocket_type)
+        public bool Attack(string rocket_type)
         {
-
-            MessageBox.Show("Враг был уничтожен ракетой " + rocket_type + "!", "Враг уничтожен!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            if (string.IsNullOrEmpty(rocket_type))
+            {
+                return false;
+            }
+            else
+            {
+                MessageBox.Show("Враг был уничтожен ракетой " + rocket_type + "!", "Враг уничтожен!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return true;
+            }
         }
         
-        public void Self_Destruction()
+        public bool Self_Destruction()
         {
+            bool pentaflag;
             Pentagon pentagon = new Pentagon();
             pentagon.Show();
+            if (pentagon.Visible)
+            {
+                pentaflag = true;
+            }
+            else
+            {
+                pentaflag = false;
+            }
+            return pentaflag;
         }
-        public void Nerd_Destruction()
+        public bool Nerd_Destruction()
         {
             MessageBox.Show("Зануда был уничтожен", "Уничтожение зануды", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return true;
         }
 
     }
 
-    class Radar
+    public class Radar
     {
-        public void Detection(bool enemy_flag)
+        public bool Detection(bool enemy_flag)
         {
-
-            MessageBox.Show("Вы не можете продолжить сканирование, пока враг не уничтожен!!", "ВНИМАНИЕ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+            if (!enemy_flag)
+            {
+                return false;
+            }
+            else
+            {
+                MessageBox.Show("Вы не можете продолжить сканирование, пока враг не уничтожен!!", "ВНИМАНИЕ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
         }
     }
 
