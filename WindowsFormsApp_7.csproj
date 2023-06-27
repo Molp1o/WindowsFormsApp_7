@@ -46,12 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Facade.cs" />
+    <Compile Include="about.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="about.Designer.cs">
+      <DependentUpon>about.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pentagon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pentagon.Designer.cs">
+      <DependentUpon>pentagon.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,9 +72,21 @@
     <Compile Include="Rockets.Designer.cs">
       <DependentUpon>Rockets.cs</DependentUpon>
     </Compile>
-    <Compile Include="strategy.cs" />
+    <Compile Include="Strategy.cs" />
+    <Compile Include="sub.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sub.Designer.cs">
+      <DependentUpon>sub.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="about.resx">
+      <DependentUpon>about.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pentagon.resx">
+      <DependentUpon>pentagon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -76,6 +99,9 @@
     </Compile>
     <EmbeddedResource Include="Rockets.resx">
       <DependentUpon>Rockets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sub.resx">
+      <DependentUpon>sub.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
